@@ -31,7 +31,7 @@ module Json2Csv
     end
 
     def array_values(value)
-      "\"#{value.join(ARRAY_TO_STRING_SEPARATOR)}\""
+      value.join(ARRAY_TO_STRING_SEPARATOR)
     end
   end
 end

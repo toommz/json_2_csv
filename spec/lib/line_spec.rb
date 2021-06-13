@@ -10,7 +10,7 @@ RSpec.describe Json2Csv::Line do
       let(:object) { Hash["id" => 0, "email" => "a@b.c", "tags" => ["ok", "ko"], "profiles" => { "facebook" => { "id" => 0, "picture" => "img.jpg" } }] }
 
       it "returns a line of CSV" do
-        expect(subject.parse).to eq([0, "a@b.c", "\"ok,ko\"", 0, "img.jpg"])
+        expect(subject.parse).to eq([0, "a@b.c", "ok,ko", 0, "img.jpg"])
       end
     end
 

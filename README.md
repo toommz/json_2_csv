@@ -20,7 +20,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+Json2Csv.from_file(json_file_path, csv_output_file_path)
+```
 
 ## Development
 

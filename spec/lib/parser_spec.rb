@@ -6,13 +6,37 @@ RSpec.describe Json2Csv::Parser do
   subject { described_class }
 
   describe "#parse" do
-    let(:data) { File.read(filepath) }
+    context "given a valid JSON string" do
+      let(:data) { File.read(filepath) }
 
-    it "turns a list of hashes to a list of arrays" do
-      result = subject.parse(data)
+      it "returns headers" do
+        headers, _ = subject.parse(data)
 
-      expect(result).to be_an(Array)
-      expect(result.first).to be_an(Array)
+        expect(headers).to eq(["id", "email", "tags", "profiles.facebook.id", "profiles.facebook.picture", "profiles.twitter.id", "profiles.twitter.picture"])
+      end
+
+      it "turns a list of hashes to a list of arrays" do
+        _, lines = subject.parse(data)
+
+        expect(lines).to be_an(Array)
+        expect(lines.first).to be_an(Array)
+      end
+    end
+
+    context "given an invalid JSON string containing no objects" do
+      let(:data) { "[]" }
+
+      it "raises a EmptyJsonError" do
+        expect{ subject.parse(data) }.to raise_error(Json2Csv::EmptyJsonError)
+      end
+    end
+
+    context "given an invalid JSON string containing no array" do
+      let(:data) { "{}" }
+
+      it "raises a BadJsonInputError" do
+        expect{ subject.parse(data) }.to raise_error(Json2Csv::BadJsonInputError)
+      end
     end
   end
 end
