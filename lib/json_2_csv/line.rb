@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 module Json2Csv
   class Line
     def initialize(object, headers)
       @object = object
       @headers = headers
     end
-    
+
     class << self
       def parse(object, headers)
-        self.new(object, headers).parse
+        new(object, headers).parse
       end
     end
 
@@ -24,7 +26,7 @@ module Json2Csv
     def fetch(dig_map)
       value = object.dig(*dig_map)
       return array_values(value) if value.is_a?(Array)
-        
+
       value
     rescue TypeError, NoMethodError
       nil

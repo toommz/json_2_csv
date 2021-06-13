@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Json2Csv
   class Headers
     def initialize(object)
@@ -6,14 +8,14 @@ module Json2Csv
 
     class << self
       def parse(object)
-        self.new(object).parse
+        new(object).parse
       end
     end
 
     def parse
       parse_object(object).flatten
     end
-  
+
     private
 
     attr_reader :object
@@ -25,7 +27,7 @@ module Json2Csv
         pathname_for(key, pathname)
       end
     end
-  
+
     def pathname_for(key, pathname)
       return key if pathname.nil?
 

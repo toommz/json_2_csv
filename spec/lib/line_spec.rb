@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 RSpec.describe Json2Csv::Line do
@@ -7,7 +9,10 @@ RSpec.describe Json2Csv::Line do
     subject { described_class.new(object, headers) }
 
     context "given a hash that has all the intended keys" do
-      let(:object) { Hash["id" => 0, "email" => "a@b.c", "tags" => ["ok", "ko"], "profiles" => { "facebook" => { "id" => 0, "picture" => "img.jpg" } }] }
+      let(:object) do
+        Hash["id" => 0, "email" => "a@b.c", "tags" => %w[ok ko],
+             "profiles" => { "facebook" => { "id" => 0, "picture" => "img.jpg" } }]
+      end
 
       it "returns a line of CSV" do
         expect(subject.parse).to eq([0, "a@b.c", "ok,ko", 0, "img.jpg"])

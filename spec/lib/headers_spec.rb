@@ -1,7 +1,12 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 RSpec.describe Json2Csv::Headers do
-  let(:object) { Hash["id" => 0, "email" => "a@b.c", "tags" => [], "profiles" => { "facebook" => { "id" => 0, "picture" => "img.jpg" } }] }
+  let(:object) do
+    Hash["id" => 0, "email" => "a@b.c", "tags" => [],
+         "profiles" => { "facebook" => { "id" => 0, "picture" => "img.jpg" } }]
+  end
 
   describe ".parse" do
     let(:double) { instance_double(described_class) }

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 RSpec.describe Json2Csv::Parser do
-  let(:filepath) { File.expand_path("../../fixtures/sample.json", __FILE__) }
+  let(:filepath) { File.expand_path("../fixtures/sample.json", __dir__) }
 
   subject { described_class }
 
@@ -10,9 +12,10 @@ RSpec.describe Json2Csv::Parser do
       let(:data) { File.read(filepath) }
 
       it "returns headers" do
-        headers, _ = subject.parse(data)
+        headers, = subject.parse(data)
 
-        expect(headers).to eq(["id", "email", "tags", "profiles.facebook.id", "profiles.facebook.picture", "profiles.twitter.id", "profiles.twitter.picture"])
+        expect(headers).to eq(["id", "email", "tags", "profiles.facebook.id", "profiles.facebook.picture",
+                               "profiles.twitter.id", "profiles.twitter.picture"])
       end
 
       it "turns a list of hashes to a list of arrays" do
@@ -27,7 +30,7 @@ RSpec.describe Json2Csv::Parser do
       let(:data) { "[]" }
 
       it "raises a EmptyJsonError" do
-        expect{ subject.parse(data) }.to raise_error(Json2Csv::EmptyJsonError)
+        expect { subject.parse(data) }.to raise_error(Json2Csv::EmptyJsonError)
       end
     end
 
@@ -35,7 +38,7 @@ RSpec.describe Json2Csv::Parser do
       let(:data) { "{}" }
 
       it "raises a BadJsonInputError" do
-        expect{ subject.parse(data) }.to raise_error(Json2Csv::BadJsonInputError)
+        expect { subject.parse(data) }.to raise_error(Json2Csv::BadJsonInputError)
       end
     end
   end

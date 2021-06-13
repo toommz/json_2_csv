@@ -6,9 +6,9 @@ RSpec.describe Json2Csv do
   end
 
   describe ".from_file" do
-    let(:filepath) { File.expand_path("../fixtures/sample.json", __FILE__) }
-    let(:expected_output_filepath) { File.expand_path("../fixtures/sample_output.csv", __FILE__) }
-    let(:output_filepath) { File.expand_path("../../tmp/output.csv", __FILE__) }
+    let(:filepath) { File.expand_path("fixtures/sample.json", __dir__) }
+    let(:expected_output_filepath) { File.expand_path("fixtures/sample_output.csv", __dir__) }
+    let(:output_filepath) { File.expand_path("../tmp/output.csv", __dir__) }
 
     let(:expected_output) { File.read(expected_output_filepath) }
 

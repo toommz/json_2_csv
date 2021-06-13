@@ -9,12 +9,14 @@ require_relative "json_2_csv/line"
 require_relative "json_2_csv/parser"
 
 module Json2Csv
-  PATHNAME_SEPARATOR = ".".freeze
-  COLUMN_SEPARATOR = ",".freeze
+  PATHNAME_SEPARATOR = "."
+  COLUMN_SEPARATOR = ","
   ARRAY_TO_STRING_SEPARATOR = COLUMN_SEPARATOR
 
   class Error < StandardError; end
+
   class EmptyJsonError < Error; end
+
   class BadJsonInputError < Error; end
 
   def self.from_file(input_path, output_path)
